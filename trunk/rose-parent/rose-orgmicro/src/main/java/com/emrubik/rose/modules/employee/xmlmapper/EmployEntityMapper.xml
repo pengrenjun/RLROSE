@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emrubik.rose.modules.employee.mapper.EmployEntitiyMapper">
+  <resultMap id="BaseResultMap" type="com.emrubik.entity.employee.bean.EmployeeEntity">
+
+    <result column="emp_id" jdbcType="VARCHAR" property="emp_id" />
+    <result column="emp_name" jdbcType="VARCHAR" property="emp_name" />
+    <result column="emp_sex" jdbcType="VARCHAR" property="emp_sex" />
+    <result column="emp_phone" jdbcType="VARCHAR" property="emp_phone" />
+    <result column="emp_mobile_phone" jdbcType="VARCHAR" property="emp_mobile_phone" />
+    <result column="emp_fax" jdbcType="VARCHAR" property="emp_fax" />
+    <result column="emp_email" jdbcType="VARCHAR" property="emp_email" />
+    <result column="emp_password" jdbcType="VARCHAR" property="emp_password" />
+    <result column="emp_birthday" jdbcType="VARCHAR" property="emp_birthday" />
+    <result column="emp_address" jdbcType="VARCHAR" property="emp_address" />
+    <result column="emp_work_address" jdbcType="VARCHAR" property="emp_work_address" />
+    <result column="emp_message" jdbcType="VARCHAR" property="emp_message" />
+    <result column="entry_time" jdbcType="VARCHAR" property="entry_time" />
+    <result column="cer_type" jdbcType="VARCHAR" property="cer_type" />
+    <result column="cer_no" jdbcType="VARCHAR" property="cer_no" />
+    <result column="emp_active" jdbcType="VARCHAR" property="emp_active" />
+    <result column="emp_enabled" jdbcType="VARCHAR" property="emp_enabled" />
+      
+     <collection property="emp_org" ofType="com.emrubik.entity.employee.bean.OrgInfo">
+          <result column="org_code" jdbcType="VARCHAR" property="org_code" />
+          <result column="org_name" jdbcType="VARCHAR" property="org_name" />
+          <result column="emp_position_id" jdbcType="VARCHAR" property="emp_position_id" />
+          <result column="is_first_org" jdbcType="VARCHAR" property="is_first_org" />
+          <result column="up_emp_id" jdbcType="VARCHAR" property="up_emp_id" />
+      </collection>
+
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    staff_no as emp_id,
+    staff_name as emp_name,
+    case  sex when '男' then 'M' ELSE 'F' END as emp_sex,
+    CORRESPONDENCE_PHONE as emp_phone,
+    MOBILE_PHONE as emp_mobile_phone,
+    '' as emp_fax,
+    E_MAIL as emp_email,
+    '' as emp_password,
+    to_char(DATE_OF_BIRTH,'yyyy-MM-dd HH:mm:ss') as emp_birthday,
+    '' as emp_address,
+    TYPE_DESCRIPTION as emp_work_address,
+    '' as emp_message,
+    to_char(DATE_JOIN,'yyyyMMddHHmmss')	as entry_time,
+    '0' as cer_type,
+    NID as cer_no,
+    HR_STATUS as emp_active,
+    HR_STATUS as emp_enabled,
+    case sub_section when '00' then section else  case city when '00' then sub_section else city end end org_code,
+    case sub_section when '00' then section_description else case city when '00' then sub_description else  city_description end end org_name,
+    JOBCODE as emp_position_id,
+    '1' as is_first_org,
+    SUPERVISOR_ID as up_emp_id
+  </sql>
+  <select id="getAllEmployees" parameterType="com.emrubik.entity.employee.bean.EmployeeEntity" resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    from PS_I_EMPLOYEE where  effdt_status='A' AND STAFF_NO NOT LIKE 'XN%'
+
+  </select>
+
+</mapper>

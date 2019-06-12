@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+     <classPathEntry location="D:\develop\localMaven\com\oracle\ojdbc6\11.2.0.1.0\ojdbc6-11.2.0.1.0.jar"/>
+
+    <context id="context" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+       <!--组织通信导入链接-->
+      <!-- <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@10.41.5.161:1529:PROD"
+                        userId="Interface"
+                        password="Ronglian123">
+        </jdbcConnection>-->
+
+        <!--邮件提醒连接-->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@10.41.5.161:1529:PROD"
+                        userId="timesheet"
+                        password="ronglian123">
+        </jdbcConnection>
+
+
+        <!--<javaModelGenerator targetPackage="com.emrubik.rose.generator.dao.bean" targetProject=".\src\main\java">
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.emrubik.rose.generator.dao.xmlmapper" targetProject=".\src\main\java" />
+
+        <javaClientGenerator targetPackage="com.emrubik.rose.generator.dao" targetProject=".\src\main\java"
+                             type="XMLMAPPER" />-->
+
+
+        <javaModelGenerator targetPackage="com.emrubik.rosemail.generator.dao.bean" targetProject=".\src\main\java">
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.emrubik.rosemail.generator.dao.xmlmapper" targetProject=".\src\main\java" />
+
+        <javaClientGenerator targetPackage="com.emrubik.rosemail.generator.dao" targetProject=".\src\main\java"
+                             type="XMLMAPPER" />
+
+
+      <!--  <table tableName="ps_i_dept" domainObjectName="DeptPo">
+            <generatedKey column="OID" sqlStatement="JDBC" identity="true" />
+        </table>
+
+        <table tableName="PS_I_EMPLOYEE" domainObjectName="EmplyeePo">
+            <generatedKey column="STAFF_NO" sqlStatement="JDBC" identity="true" />
+        </table>
+
+        <table tableName="PS_I_JOBCODE" domainObjectName="JobCodePo">
+            <generatedKey column="OID" sqlStatement="JDBC" identity="true" />
+        </table>
+
+        <table tableName="PS_I_ROSE_WORKFLOW" domainObjectName="RoseWorkflowPo">
+
+        </table>-->
+
+        <table tableName="UEC_PMS_EMAIL_OID" domainObjectName="PmsEmailOidPo">
+            <generatedKey column="ID" sqlStatement="JDBC" identity="true"  />
+        </table>
+
+        <table tableName="UEC_PSS_EMAIL" domainObjectName="PssEmailPo">
+        </table>
+    </context>
+</generatorConfiguration>
